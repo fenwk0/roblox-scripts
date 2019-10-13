@@ -1,0 +1,44 @@
+print("Hello world!")
+
+
+workspace.brick001.Size = Vector3.new(10,10,10)
+workspace.brick001.Position = Vector3.new(5.194, 60, -12.902)
+	
+
+
+
+-- Create two parts, PartA and PartB
+local partA = Instance.new("Part", workspace)
+partA.Name = "PartA"
+partA.BrickColor = BrickColor.new("Really red")
+partA.Anchored = false
+partA.Position = Vector3.new(-6.194, 50, -10.902)
+
+local partB = Instance.new("Part", workspace)
+partB.Name = "PartB"
+partB.BrickColor = BrickColor.new("Really blue")
+partB.Anchored = true
+ 
+-- Demonstrate overlap
+partB.Position = Vector3.new(-6.194, 40, -8.902) -- This would cause an overlap!
+print(partB.Position == Vector3.new(0, 50, 0)) --> false
+print(partB.Position) --> Very close to (0, 51.2, 0)
+
+
+wait(10.0)
+local itemArray = {}
+local itemStrTemp = "Item[%i]"
+	
+for index = 1, 100 do
+	local itemStr = string.format(itemStrTemp, index)
+    local item = Instance.new("Part", workspace)
+    item.Name = itemStr
+    item.BrickColor = BrickColor.new(index/50, (index+50)/50, (index+100)/50)
+    item.Position = Vector3.new((index/2)-6.194, 100.5-index+0.5, (index/5)-8.902) -- This would cause an overlap!
+
+    item.Anchored = false
+	
+    itemArray[index] = item;
+    print(itemStr, " = ", itemArray[index])
+	wait(0.1)
+end
